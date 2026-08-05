@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lusotec | Próximamente</title>
+    <meta name="description" content="Lusotec - Estamos construyendo algo increíble. Nuestra nueva página web estará disponible muy pronto.">
+    <meta name="robots" content="index, follow">
+    <meta property="og:title" content="Lusotec | Próximamente">
+    <meta property="og:description" content="Estamos construyendo algo increíble. Nuestra nueva página web estará disponible muy pronto.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://lusotec.cl">
+    <meta property="og:image" content="https://lusotec.cl/assets/logo-lusotec.png">
+    <link rel="icon" type="image/png" href="assets/logo-lusotec.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Animated background particles -->
+    <canvas id="particles-canvas"></canvas>
+
+    <!-- Glowing orbs background -->
+    <div class="bg-orbs">
+        <div class="orb orb-1"></div>
+        <div class="orb orb-2"></div>
+        <div class="orb orb-3"></div>
+    </div>
+
+    <main class="container">
+        <!-- Logo -->
+        <div class="logo-wrapper" id="logo-wrapper">
+            <img src="assets/logo-lusotec.png" alt="Lusotec Logo" class="logo" id="logo">
+        </div>
+
+        <!-- Status badge -->
+        <div class="status-badge" id="status-badge">
+            <span class="pulse-dot"></span>
+            <span>En desarrollo</span>
+        </div>
+
+        <!-- Main heading -->
+        <h1 class="heading" id="heading">
+            <span class="heading-line">Estamos</span>
+            <span class="heading-line heading-gradient">construyendo</span>
+            <span class="heading-line">algo increíble</span>
+        </h1>
+
+        <!-- Description -->
+        <p class="description" id="description">
+            Nuestra nueva página web estará disponible muy pronto. 
+            Estamos trabajando para ofrecerte la mejor experiencia.
+        </p>
+
+        <!-- Animated progress bar -->
+        <div class="progress-section" id="progress-section">
+            <div class="progress-bar">
+                <div class="progress-fill"></div>
+                <div class="progress-glow"></div>
+            </div>
+            <span class="progress-text">Progreso del sitio</span>
+        </div>
+
+        <!-- Contact info -->
+        <div class="contact-section" id="contact-section">
+            <p class="contact-text">¿Tienes preguntas? Contáctanos:</p>
+            <a href="mailto:contacto@lusotec.cl" class="contact-link" id="contact-link">
+                <svg class="mail-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <rect x="2" y="4" width="20" height="16" rx="2"/>
+                    <path d="M22 4L12 13L2 4"/>
+                </svg>
+                contacto@lusotec.cl
+            </a>
+        </div>
+
+        <!-- Footer -->
+        <footer class="footer" id="footer">
+            <p>&copy; 2025 Lusotec. Todos los derechos reservados.</p>
+        </footer>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>
