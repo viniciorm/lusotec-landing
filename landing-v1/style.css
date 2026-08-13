@@ -734,7 +734,7 @@ button, input, select, textarea {
     display: flex;
     align-items: center;
     gap: 10px;
-    border-bottom: 1px stroke var(--slate-100);
+    border-bottom: 1px solid var(--slate-100);
 }
 
 .category-list li::before {
