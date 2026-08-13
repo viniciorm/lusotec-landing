@@ -1,0 +1,12 @@
+BEGIN:VCARD
+VERSION:3.0
+N:Marques Ferreira;Víctor;;;
+FN:Víctor Marques Ferreira
+ORG:LUSOTEC SPA
+TITLE:Gerente General / General Manager
+TEL;TYPE=CELL,VOICE:+56957181291
+TEL;TYPE=CELL,VOICE:+56992992098
+EMAIL;TYPE=INTERNET,PREF:busma.cuero@gmail.com
+URL:https://www.lusotec.cl
+NOTE:Productos químicos, asesoría técnica y soluciones para la industria del cuero y derivados.
+END:VCARD

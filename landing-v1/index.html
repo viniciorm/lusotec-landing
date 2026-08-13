@@ -1,0 +1,605 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LUSOTEC SPA | Productos químicos y asesoría técnica para cuero</title>
+    <meta name="description" content="Productos químicos especializados, asesoría técnica y soluciones para la industria del cuero. Conoce las soluciones de LUSOTEC SPA.">
+    <meta name="robots" content="noindex, nofollow">
+    <link rel="canonical" href="https://www.lusotec.cl/landing-v1/">
+
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="LUSOTEC SPA | Productos químicos y asesoría técnica para cuero">
+    <meta property="og:description" content="Productos químicos especializados, asesoría técnica y soluciones para la industria del cuero y sus derivados.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://www.lusotec.cl/landing-v1/">
+    <meta property="og:image" content="https://www.lusotec.cl/landing-v1/assets/logo-lusotec.jpg">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/jpeg" href="assets/logo-lusotec.jpg">
+
+    <!-- Fonts & CSS -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+
+    <!-- Structured Data (JSON-LD) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "LUSOTEC SPA",
+      "url": "https://www.lusotec.cl",
+      "logo": "https://www.lusotec.cl/landing-v1/assets/logo-lusotec.jpg",
+      "description": "Productos químicos especializados, asesoría técnica y soluciones para la industria del curtido y derivados.",
+      "telephone": ["+56957181291", "+56992992098"],
+      "email": "busma.cuero@gmail.com",
+      "address": {
+        "@type": "PostalAddress",
+        "addressCountry": "CL"
+      }
+    }
+    </script>
+</head>
+<body>
+    <!-- Floating WhatsApp Button -->
+    <a href="https://wa.me/56957181291?text=Hola%20V%C3%ADctor%2C%20quisiera%20recibir%20informaci%C3%B3n%20sobre%20las%20soluciones%20de%20Lusotec." 
+       class="whatsapp-float" 
+       id="whatsapp-float" 
+       target="_blank" 
+       rel="noopener" 
+       aria-label="Contactar por WhatsApp">
+        <svg class="whatsapp-icon" viewBox="0 0 32 32" fill="currentColor">
+            <path d="M16 2a13.9 13.9 0 0 0-11.8 21.3L2 30l6.9-2.2A13.9 13.9 0 1 0 16 2zm0 25.4c-2.3 0-4.5-.6-6.4-1.8l-.5-.3-4.1 1.3 1.3-3.9-.3-.5A11.5 11.5 0 1 1 16 27.4zm6.3-8.6c-.3-.2-2-.9-2.3-1.1-.3-.1-.5-.2-.7.2-.2.3-.9 1.1-1.1 1.3-.2.2-.4.2-.7.1-.3-.1-1.3-.5-2.5-1.5-.9-.8-1.5-1.8-1.7-2.1-.2-.3 0-.5.1-.6.1-.1.3-.4.4-.6.1-.2.2-.3.3-.5.1-.2 0-.4 0-.5s-.7-1.7-1-2.3c-.3-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1.1 1.1-1.1 2.6 0 1.5 1.1 3 1.2 3.2.2.2 2.2 3.4 5.3 4.7.7.3 1.3.5 1.8.7.8.2 1.5.2 2.1.1.7-.1 2-.8 2.3-1.6.3-.8.3-1.5.2-1.6 0-.2-.3-.3-.6-.5z"/>
+        </svg>
+        <span class="whatsapp-pulse"></span>
+    </a>
+
+    <!-- Header Navigation -->
+    <header class="header" id="header">
+        <div class="container header-container">
+            <a href="#hero" class="brand">
+                <img src="assets/logo-lusotec.jpg" alt="LUSOTEC SPA Logo" class="brand-logo">
+                <span class="brand-title">LUSOTEC <span class="brand-sub">SPA</span></span>
+            </a>
+
+            <!-- Desktop Navigation Links -->
+            <nav class="nav-desktop">
+                <a href="#hero" class="nav-link active" data-i18n="nav_home">Inicio</a>
+                <a href="#sobre-lusotec" class="nav-link" data-i18n="nav_about">Lusotec</a>
+                <a href="#soluciones" class="nav-link" data-i18n="nav_solutions">Soluciones</a>
+                <a href="#cuero-derivados" class="nav-link" data-i18n="nav_derivatives">Cuero y derivados</a>
+                <a href="#contacto" class="nav-link" data-i18n="nav_contact">Contacto</a>
+            </nav>
+
+            <div class="header-actions">
+                <!-- Language Selector ES | EN -->
+                <div class="lang-selector">
+                    <button class="lang-btn active" id="btn-lang-es" onclick="switchLanguage('es')">ES</button>
+                    <span class="lang-divider">|</span>
+                    <button class="lang-btn" id="btn-lang-en" onclick="switchLanguage('en')">EN</button>
+                </div>
+
+                <!-- Header CTA Button -->
+                <a href="#contacto" class="btn btn-primary header-cta" data-i18n="cta_header">Solicitar asesoría</a>
+
+                <!-- Mobile Hamburger Button -->
+                <button class="menu-toggle" id="menu-toggle" aria-label="Abrir menú">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+        </div>
+
+        <!-- Mobile Drawer Navigation -->
+        <div class="nav-mobile" id="nav-mobile">
+            <div class="nav-mobile-content">
+                <a href="#hero" class="nav-mobile-link" onclick="closeMobileMenu()" data-i18n="nav_home">Inicio</a>
+                <a href="#sobre-lusotec" class="nav-mobile-link" onclick="closeMobileMenu()" data-i18n="nav_about">Lusotec</a>
+                <a href="#soluciones" class="nav-mobile-link" onclick="closeMobileMenu()" data-i18n="nav_solutions">Soluciones</a>
+                <a href="#cuero-derivados" class="nav-mobile-link" onclick="closeMobileMenu()" data-i18n="nav_derivatives">Cuero y derivados</a>
+                <a href="#contacto" class="nav-mobile-link" onclick="closeMobileMenu()" data-i18n="nav_contact">Contacto</a>
+                <div class="mobile-lang">
+                    <span data-i18n="language_label">Idioma:</span>
+                    <button class="lang-btn active" id="btn-lang-es-mob" onclick="switchLanguage('es')">Español</button>
+                    <button class="lang-btn" id="btn-lang-en-mob" onclick="switchLanguage('en')">English</button>
+                </div>
+                <a href="#contacto" class="btn btn-primary mobile-cta" onclick="closeMobileMenu()" data-i18n="cta_header">Solicitar asesoría</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main>
+        <!-- Hero Section -->
+        <section class="hero" id="hero">
+            <div class="hero-bg" style="background-image: url('assets/leather-bg.jpg');"></div>
+            <div class="hero-overlay"></div>
+            <div class="container hero-container">
+                <div class="hero-badge">
+                    <span class="pulse-dot"></span>
+                    <span data-i18n="hero_badge">LUSOTEC SPA · SOLUCIONES PARA LA INDUSTRIA</span>
+                </div>
+                <h1 class="hero-title" data-i18n="hero_title">Soluciones y alternativas para cuero y derivados</h1>
+                <p class="hero-text" data-i18n="hero_text">Productos químicos especializados, asesoría técnica y soluciones orientadas a optimizar procesos, mejorar el rendimiento y garantizar la calidad en la industria del curtido.</p>
+                <div class="hero-actions">
+                    <a href="#soluciones" class="btn btn-primary btn-lg" data-i18n="hero_cta_main">Conoce nuestras soluciones</a>
+                    <a href="#contacto" class="btn btn-outline btn-lg" data-i18n="hero_cta_sec">Contáctanos</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Sobre Lusotec Section -->
+        <section class="section about-section" id="sobre-lusotec">
+            <div class="container">
+                <div class="about-grid">
+                    <div class="about-content">
+                        <span class="section-tag" data-i18n="about_tag">SOBRE NOSOTROS</span>
+                        <h2 class="section-title" data-i18n="about_title">Experiencia y conocimiento al servicio de la industria</h2>
+                        <div class="about-paragraphs">
+                            <p data-i18n="about_p1">LUSOTEC se especializa en la producción y distribución de productos químicos, asesoría técnica y soluciones innovadoras para el sector del curtido.</p>
+                            <p data-i18n="about_p2">Nuestro objetivo es optimizar recursos, mejorar el rendimiento y garantizar la calidad de los productos, atendiendo tanto al mercado nacional como internacional.</p>
+                            <p data-i18n="about_p3">La empresa nace para responder a la creciente demanda de productos químicos especializados, eficientes y sostenibles, promoviendo la optimización de recursos y la economía circular en la industria del curtido.</p>
+                            <p data-i18n="about_p4">Contamos con profesionales comprometidos con ofrecer productos de alta calidad y un servicio que supere las expectativas de nuestros clientes.</p>
+                        </div>
+                    </div>
+                    <div class="about-image-wrapper">
+                        <img src="assets/lab-bg.jpg" alt="Laboratorio e industria de curtido Lusotec" class="about-img" loading="lazy">
+                        <div class="about-img-badge">
+                            <span class="badge-number">100%</span>
+                            <span class="badge-text" data-i18n="about_badge_text">Compromiso con la Calidad & Economía Circular</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Attributes / Values Grid -->
+                <div class="values-grid">
+                    <div class="value-card">
+                        <div class="value-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
+                        </div>
+                        <h3 class="value-title" data-i18n="val_1_title">Experiencia técnica</h3>
+                        <p class="value-desc" data-i18n="val_1_desc">Conocimiento especializado para resolver desafíos técnicos específicos de cada curtiembre.</p>
+                    </div>
+
+                    <div class="value-card">
+                        <div class="value-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg>
+                        </div>
+                        <h3 class="value-title" data-i18n="val_2_title">Calidad consistente</h3>
+                        <p class="value-desc" data-i18n="val_2_desc">Estándares rigurosos de formulación y control para garantizar resultados confiables lote a lote.</p>
+                    </div>
+
+                    <div class="value-card">
+                        <div class="value-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+                        </div>
+                        <h3 class="value-title" data-i18n="val_3_title">Optimización de recursos</h3>
+                        <p class="value-desc" data-i18n="val_3_desc">Soluciones diseñadas para reducir costos, tiempos de proceso y maximizar el rendimiento.</p>
+                    </div>
+
+                    <div class="value-card">
+                        <div class="value-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2zm0 18a8 8 0 1 1 8-8 8 8 0 0 1-8 8z"/><path d="M12 6v6l4 2"/></svg>
+                        </div>
+                        <h3 class="value-title" data-i18n="val_4_title">Soluciones sostenibles</h3>
+                        <p class="value-desc" data-i18n="val_4_desc">Promoción de principios de economía circular e insumos respetuosos con el medio ambiente.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Soluciones / Productos Section -->
+        <section class="section solutions-section" id="soluciones">
+            <div class="container">
+                <div class="section-header text-center">
+                    <span class="section-tag" data-i18n="solutions_tag">NUESTRAS SOLUCIONES</span>
+                    <h2 class="section-title" data-i18n="solutions_title">Productos para las distintas etapas del proceso</h2>
+                    <p class="section-subtitle" data-i18n="solutions_subtitle">Contamos con diferentes familias de productos y soluciones para la industria del cuero.</p>
+                </div>
+
+                <div class="categories-grid">
+                    <!-- Categoría 1: Ribera y Precurtido -->
+                    <div class="category-card">
+                        <div class="category-header">
+                            <div class="category-num">01</div>
+                            <div>
+                                <h3 class="category-title" data-i18n="cat_1_title">Ribera y precurtido</h3>
+                                <span class="category-subtitle" data-i18n="cat_1_sub">Beamhouse & Pretanning</span>
+                            </div>
+                        </div>
+                        <ul class="category-list" id="cat-list-1">
+                            <!-- Items loaded dynamically for easy edition & bilingual support -->
+                        </ul>
+                        <div class="category-footer">
+                            <button onclick="selectCategoryAndScroll('Ribera y precurtido')" class="btn btn-secondary btn-sm" data-i18n="cat_cta">Consultar productos</button>
+                        </div>
+                    </div>
+
+                    <!-- Categoría 2: Recurtición, Sintanes y Taninos -->
+                    <div class="category-card">
+                        <div class="category-header">
+                            <div class="category-num">02</div>
+                            <div>
+                                <h3 class="category-title" data-i18n="cat_2_title">Recurtición, sintanes y taninos</h3>
+                                <span class="category-subtitle" data-i18n="cat_2_sub">Retanning, Syntans & Tannins</span>
+                            </div>
+                        </div>
+                        <ul class="category-list" id="cat-list-2">
+                        </ul>
+                        <div class="category-footer">
+                            <button onclick="selectCategoryAndScroll('Recurtición, sintanes y taninos')" class="btn btn-secondary btn-sm" data-i18n="cat_cta">Consultar productos</button>
+                        </div>
+                    </div>
+
+                    <!-- Categoría 3: Engrasantes -->
+                    <div class="category-card">
+                        <div class="category-header">
+                            <div class="category-num">03</div>
+                            <div>
+                                <h3 class="category-title" data-i18n="cat_3_title">Engrasantes</h3>
+                                <span class="category-subtitle" data-i18n="cat_3_sub">Fatliquors</span>
+                            </div>
+                        </div>
+                        <ul class="category-list" id="cat-list-3">
+                        </ul>
+                        <div class="category-footer">
+                            <button onclick="selectCategoryAndScroll('Engrasantes')" class="btn btn-secondary btn-sm" data-i18n="cat_cta">Consultar productos</button>
+                        </div>
+                    </div>
+
+                    <!-- Categoría 4: Colorantes -->
+                    <div class="category-card">
+                        <div class="category-header">
+                            <div class="category-num">04</div>
+                            <div>
+                                <h3 class="category-title" data-i18n="cat_4_title">Colorantes</h3>
+                                <span class="category-subtitle" data-i18n="cat_4_sub">Dyes</span>
+                            </div>
+                        </div>
+                        <ul class="category-list" id="cat-list-4">
+                        </ul>
+                        <div class="category-footer">
+                            <button onclick="selectCategoryAndScroll('Colorantes')" class="btn btn-secondary btn-sm" data-i18n="cat_cta">Consultar productos</button>
+                        </div>
+                    </div>
+
+                    <!-- Categoría 5: Terminación y Auxiliares -->
+                    <div class="category-card">
+                        <div class="category-header">
+                            <div class="category-num">05</div>
+                            <div>
+                                <h3 class="category-title" data-i18n="cat_5_title">Terminación y auxiliares</h3>
+                                <span class="category-subtitle" data-i18n="cat_5_sub">Finishing & Auxiliaries</span>
+                            </div>
+                        </div>
+                        <ul class="category-list" id="cat-list-5">
+                        </ul>
+                        <div class="category-footer">
+                            <button onclick="selectCategoryAndScroll('Terminación y auxiliares')" class="btn btn-secondary btn-sm" data-i18n="cat_cta">Consultar productos</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Asesoría Técnica Section -->
+        <section class="section advice-section" id="asesoria-tecnica">
+            <div class="container">
+                <div class="advice-card-wrapper">
+                    <div class="advice-main">
+                        <span class="section-tag section-tag-teal" data-i18n="advice_tag">VALOR AGREGADO</span>
+                        <h2 class="advice-title" data-i18n="advice_title">No se trata solamente de suministrar un producto</h2>
+                        <p class="advice-lead" data-i18n="advice_lead">Cada proceso, materia prima y resultado esperado presenta desafíos diferentes.</p>
+                        <p class="advice-desc" data-i18n="advice_desc">Por eso, LUSOTEC complementa su oferta de productos con asesoría técnica y acompañamiento para identificar alternativas adecuadas a las necesidades de cada cliente.</p>
+                        <a href="#contacto" class="btn btn-primary btn-lg advice-cta" data-i18n="advice_cta">Solicitar asesoría</a>
+                    </div>
+
+                    <div class="advice-pillars-grid">
+                        <div class="pillar-card">
+                            <div class="pillar-num">01</div>
+                            <h3 class="pillar-title" data-i18n="pil_1_title">Optimización de recursos</h3>
+                            <p class="pillar-text" data-i18n="pil_1_desc">Buscamos soluciones que contribuyan a procesos más eficientes.</p>
+                        </div>
+                        <div class="pillar-card">
+                            <div class="pillar-num">02</div>
+                            <h3 class="pillar-title" data-i18n="pil_2_title">Rendimiento y calidad</h3>
+                            <p class="pillar-text" data-i18n="pil_2_desc">Productos y alternativas orientados a obtener resultados consistentes.</p>
+                        </div>
+                        <div class="pillar-card">
+                            <div class="pillar-num">03</div>
+                            <h3 class="pillar-title" data-i18n="pil_3_title">Acompañamiento técnico</h3>
+                            <p class="pillar-text" data-i18n="pil_3_desc">Atención directa para entender cada necesidad y recomendar soluciones.</p>
+                        </div>
+                        <div class="pillar-card">
+                            <div class="pillar-num">04</div>
+                            <h3 class="pillar-title" data-i18n="pil_4_title">Soluciones sostenibles</h3>
+                            <p class="pillar-text" data-i18n="pil_4_desc">Promovemos la optimización de recursos y alternativas alineadas con una industria más eficiente y sostenible.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Cuero y Derivados Section -->
+        <section class="section derivatives-section" id="cuero-derivados">
+            <div class="container">
+                <div class="section-header text-center">
+                    <span class="section-tag" data-i18n="derivatives_tag">DERIVADOS DE ORIGEN ANIMAL</span>
+                    <h2 class="section-title" data-i18n="derivatives_title">Nuevas alternativas y aplicaciones</h2>
+                    <p class="section-subtitle" data-i18n="derivatives_subtitle">Nuestra experiencia en la industria nos permite explorar y desarrollar soluciones asociadas al aprovechamiento de materias primas y derivados de origen animal.</p>
+                </div>
+
+                <!-- Products Grid: Colágeno, Gelatina, Proteína -->
+                <div class="derivatives-products-grid">
+                    <!-- Colágeno Hidrolizado -->
+                    <div class="derivative-card featured-derivative">
+                        <div class="derivative-content">
+                            <div class="derivative-badge" data-i18n="collagen_badge">PROTEÍNAS & PÉPTIDOS</div>
+                            <h3 class="derivative-title" data-i18n="collagen_title">Colágeno hidrolizado</h3>
+                            <p class="derivative-text" data-i18n="collagen_desc">Colágeno sometido a hidrólisis para obtener péptidos y aminoácidos de alta biodisponibilidad.</p>
+                            <ul class="derivative-attributes">
+                                <li>
+                                    <svg class="check-icon" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+                                    <span data-i18n="collagen_attr_1">Alta biodisponibilidad</span>
+                                </li>
+                                <li>
+                                    <svg class="check-icon" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+                                    <span data-i18n="collagen_attr_2">Fácil digestión y absorción</span>
+                                </li>
+                                <li>
+                                    <svg class="check-icon" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+                                    <span data-i18n="collagen_attr_3">Aplicaciones funcionales</span>
+                                </li>
+                            </ul>
+                        </div>
+                        
+                        <!-- Visual Hydrolysis Process Flow -->
+                        <div class="process-flow-container">
+                            <span class="process-flow-title" data-i18n="process_title">Proceso de Hidrólisis:</span>
+                            <div class="process-steps">
+                                <div class="process-step">
+                                    <span class="step-dot"></span>
+                                    <span class="step-label" data-i18n="step_1">Fibra de colágeno</span>
+                                </div>
+                                <div class="step-arrow">↓</div>
+                                <div class="process-step">
+                                    <span class="step-dot"></span>
+                                    <span class="step-label" data-i18n="step_2">Gelatina</span>
+                                </div>
+                                <div class="step-arrow">↓</div>
+                                <div class="process-step">
+                                    <span class="step-dot"></span>
+                                    <span class="step-label" data-i18n="step_3">Péptidos</span>
+                                </div>
+                                <div class="step-arrow">↓</div>
+                                <div class="process-step">
+                                    <span class="step-dot active-step"></span>
+                                    <span class="step-label" data-i18n="step_4">Aminoácidos</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Gelatina Industrial -->
+                    <div class="derivative-card">
+                        <div class="derivative-badge" data-i18n="gelatin_badge">USO INDUSTRIAL</div>
+                        <h3 class="derivative-title" data-i18n="gelatin_title">Gelatina industrial</h3>
+                        <p class="derivative-text" data-i18n="gelatin_desc">Producto obtenido a partir del colágeno de origen animal, procesado bajo estándares de calidad para diferentes aplicaciones industriales.</p>
+                    </div>
+
+                    <!-- Proteína de Vacuno Deshidratada -->
+                    <div class="derivative-card">
+                        <div class="derivative-badge" data-i18n="protein_badge">NUTRICIÓN & ALIMENTACIÓN</div>
+                        <h3 class="derivative-title" data-i18n="protein_title">Proteína de vacuno deshidratada</h3>
+                        <p class="derivative-text" data-i18n="protein_desc">Fuente natural de proteína de alta calidad con aplicaciones en suplementos, alimentos y productos para mascotas.</p>
+                    </div>
+                </div>
+
+                <!-- Applications Grid -->
+                <div class="applications-wrapper">
+                    <h3 class="applications-heading text-center" data-i18n="apps_heading">Campos de Aplicación</h3>
+                    <div class="applications-grid">
+                        <div class="app-card">
+                            <div class="app-icon">🧪</div>
+                            <span class="app-title" data-i18n="app_1">Suplementos y alimentos funcionales</span>
+                        </div>
+                        <div class="app-card">
+                            <div class="app-icon">🌾</div>
+                            <span class="app-title" data-i18n="app_2">Nutrición animal</span>
+                        </div>
+                        <div class="app-card">
+                            <div class="app-icon">🐾</div>
+                            <span class="app-title" data-i18n="app_3">Productos para mascotas</span>
+                        </div>
+                        <div class="app-card">
+                            <div class="app-icon">✨</div>
+                            <span class="app-title" data-i18n="app_4">Cosmética y cuidado personal</span>
+                        </div>
+                        <div class="app-card">
+                            <div class="app-icon">🌿</div>
+                            <span class="app-title" data-i18n="app_5">Nutrición y bienestar</span>
+                        </div>
+                        <div class="app-card">
+                            <div class="app-icon">🏭</div>
+                            <span class="app-title" data-i18n="app_6">Aplicaciones industriales</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Formulario de Contacto & Datos Directos -->
+        <section class="section contact-section" id="contacto">
+            <div class="container">
+                <div class="contact-grid">
+                    <!-- Form Side -->
+                    <div class="contact-form-wrapper">
+                        <span class="section-tag" data-i18n="contact_tag">CONTÁCTANOS</span>
+                        <h2 class="section-title" data-i18n="contact_title">¿Necesitas una solución para tu proceso?</h2>
+                        <p class="contact-subtitle" data-i18n="contact_subtitle">Conversemos sobre tus necesidades. Ya sea que busques un producto específico, una alternativa para mejorar un proceso o asesoría técnica, cuéntanos tu requerimiento.</p>
+
+                        <!-- Contact Form -->
+                        <form id="lusotec-contact-form" class="lusotec-form" onsubmit="handleFormSubmit(event)">
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="nombre" data-i18n="lbl_name">Nombre y apellido *</label>
+                                    <input type="text" id="nombre" name="nombre" required placeholder="Ej: Juan Pérez">
+                                </div>
+                                <div class="form-group">
+                                    <label for="empresa" data-i18n="lbl_company">Empresa *</label>
+                                    <input type="text" id="empresa" name="empresa" required placeholder="Ej: Curtiembre S.A.">
+                                </div>
+                            </div>
+
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="pais_ciudad" data-i18n="lbl_country">País / Ciudad</label>
+                                    <input type="text" id="pais_ciudad" name="pais_ciudad" placeholder="Ej: Chile / Santiago">
+                                </div>
+                                <div class="form-group">
+                                    <label for="telefono" data-i18n="lbl_phone">Teléfono / WhatsApp *</label>
+                                    <input type="tel" id="telefono" name="telefono" required placeholder="+56 9 1234 5678">
+                                </div>
+                            </div>
+
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="email" data-i18n="lbl_email">Correo electrónico *</label>
+                                    <input type="email" id="email" name="email" required placeholder="correo@empresa.com">
+                                </div>
+                                <div class="form-group">
+                                    <label for="area_interes" data-i18n="lbl_area">Área de interés</label>
+                                    <select id="area_interes" name="area_interes">
+                                        <option value="Ribera y precurtido" data-i18n="opt_1">Ribera y precurtido</option>
+                                        <option value="Recurtición, sintanes y taninos" data-i18n="opt_2">Recurtición, sintanes y taninos</option>
+                                        <option value="Engrasantes" data-i18n="opt_3">Engrasantes</option>
+                                        <option value="Colorantes" data-i18n="opt_4">Colorantes</option>
+                                        <option value="Terminación y auxiliares" data-i18n="opt_5">Terminación y auxiliares</option>
+                                        <option value="Colágeno y derivados" data-i18n="opt_6">Colágeno y derivados</option>
+                                        <option value="Asesoría técnica" data-i18n="opt_7">Asesoría técnica</option>
+                                        <option value="Otro" data-i18n="opt_8">Otro</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="mensaje" data-i18n="lbl_message">Mensaje / Requerimiento *</label>
+                                <textarea id="mensaje" name="mensaje" rows="4" required placeholder="Describe tu consulta o necesidad técnica..."></textarea>
+                            </div>
+
+                            <div class="form-group checkbox-group">
+                                <input type="checkbox" id="consentimiento" name="consentimiento" required>
+                                <label for="consentimiento" data-i18n="lbl_consent">Autorizo a LUSOTEC SPA a contactarme en relación con esta consulta.</label>
+                            </div>
+
+                            <button type="submit" class="btn btn-primary btn-block" id="form-submit-btn" data-i18n="btn_send">Enviar consulta</button>
+                            <div id="form-status" class="form-status-msg"></div>
+                        </form>
+                    </div>
+
+                    <!-- Contact Details Side -->
+                    <div class="contact-info-wrapper">
+                        <div class="contact-card">
+                            <div class="contact-card-header">
+                                <img src="assets/logo-lusotec.jpg" alt="LUSOTEC SPA" class="contact-logo">
+                                <div>
+                                    <h3 class="contact-person-name">Víctor Marques Ferreira</h3>
+                                    <p class="contact-person-title" data-i18n="contact_role">Gerente General / General Manager</p>
+                                    <p class="contact-company-name">LUSOTEC SPA</p>
+                                </div>
+                            </div>
+
+                            <div class="contact-details-list">
+                                <div class="detail-item">
+                                    <span class="detail-icon">📞</span>
+                                    <div>
+                                        <span class="detail-label" data-i18n="lbl_phones">Teléfonos de contacto:</span>
+                                        <a href="tel:+56957181291" class="detail-link">+56 9 5718 1291</a>
+                                        <a href="tel:+56992992098" class="detail-link">+56 9 9299 2098</a>
+                                    </div>
+                                </div>
+
+                                <div class="detail-item">
+                                    <span class="detail-icon">✉️</span>
+                                    <div>
+                                        <span class="detail-label" data-i18n="lbl_mail">Correo electrónico:</span>
+                                        <a href="mailto:busma.cuero@gmail.com" class="detail-link">busma.cuero@gmail.com</a>
+                                    </div>
+                                </div>
+
+                                <div class="detail-item">
+                                    <span class="detail-icon">🌐</span>
+                                    <div>
+                                        <span class="detail-label" data-i18n="lbl_web">Sitio web:</span>
+                                        <a href="https://www.lusotec.cl" target="_blank" class="detail-link">www.lusotec.cl</a>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="contact-actions-grid">
+                                <a href="https://wa.me/56957181291?text=Hola%20V%C3%ADctor%2C%20quisiera%20recibir%20informaci%C3%B3n%20sobre%20las%20soluciones%20de%20Lusotec." 
+                                   target="_blank" 
+                                   class="btn btn-whatsapp" 
+                                   data-i18n="btn_wa">
+                                    Contactar por WhatsApp
+                                </a>
+                                <a href="mailto:busma.cuero@gmail.com?subject=Consulta%20Lusotec" 
+                                   class="btn btn-outline-sm" 
+                                   data-i18n="btn_mail">
+                                    Enviar correo
+                                </a>
+                                <a href="vcard-victor.vcf" 
+                                   download="Victor_Marques_Lusotec.vcf" 
+                                   class="btn btn-outline-sm" 
+                                   data-i18n="btn_vcard">
+                                    Guardar contacto
+                                </a>
+                            </div>
+
+                            <!-- QR Code Block -->
+                            <div class="qr-block">
+                                <div class="qr-canvas-container" id="qr-container">
+                                    <!-- Dynamic SVG QR Generated by Script -->
+                                </div>
+                                <div class="qr-info">
+                                    <span class="qr-title" data-i18n="qr_title">Escanea para visitar lusotec.cl</span>
+                                    <span class="qr-url">https://www.lusotec.cl/landing-v1/</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container footer-container">
+            <div class="footer-brand">
+                <a href="#hero" class="brand">
+                    <img src="assets/logo-lusotec.jpg" alt="LUSOTEC SPA" class="brand-logo">
+                    <span class="brand-title">LUSOTEC <span class="brand-sub">SPA</span></span>
+                </a>
+                <p class="footer-tagline" data-i18n="footer_tagline">Soluciones y alternativas para cuero y derivados</p>
+                <p class="footer-subtagline" data-i18n="footer_subtagline">Productos químicos · Asesoría técnica · Soluciones especializadas</p>
+            </div>
+
+            <div class="footer-links">
+                <a href="#contacto" data-i18n="footer_contact">Contacto</a>
+                <a href="vcard-victor.vcf" download data-i18n="footer_vcard">vCard</a>
+            </div>
+
+            <div class="footer-copy">
+                <p>&copy; 2026 LUSOTEC SPA. <span data-i18n="footer_rights">Todos los derechos reservados.</span></p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="script.js"></script>
+</body>
+</html>
