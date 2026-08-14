@@ -1,0 +1,9 @@
+# Production robots.txt for LUSOTEC SPA (https://www.lusotec.cl/)
+
+User-agent: *
+Allow: /
+
+# Keep private development environments hidden from crawlers
+Disallow: /landing-v1/
+
+Sitemap: https://www.lusotec.cl/sitemap.xml

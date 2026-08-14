@@ -1,8 +1,8 @@
 /**
  * LUSOTEC SPA - Landing Page V1 Script
  * Handles Bilingual Translation Engine (ES|EN), LocalStorage Persistence,
- * Mobile Navigation Drawer, Category Selection, QR Code SVG Generation,
- * Google Sheets Form Submission Handler, and UTM Parameter Tracking.
+ * Mobile Navigation Drawer, Category Selection, Real QR Code Integration,
+ * Google Sheets Form Submission Handler with Error Protection, and UTM Parameter Tracking.
  */
 
 // ==========================================================================
@@ -16,6 +16,7 @@ const translations = {
         nav_about: "Lusotec",
         nav_solutions: "Soluciones",
         nav_derivatives: "Cuero y derivados",
+        nav_faq: "Preguntas frecuentes",
         nav_contact: "Contacto",
         cta_header: "Solicitar asesoría",
         language_label: "Idioma:",
@@ -30,7 +31,7 @@ const translations = {
         // About
         about_tag: "SOBRE NOSOTROS",
         about_title: "Experiencia y conocimiento al servicio de la industria",
-        about_p1: "LUSOTEC se especializa en la producción y distribución de productos químicos, asesoría técnica y soluciones innovadoras para el sector del curtido.",
+        about_p1: "LUSOTEC SPA se especializa en la producción y distribución de productos químicos, asesoría técnica y soluciones para la industria del cuero y el sector del curtido.",
         about_p2: "Nuestro objetivo es optimizar recursos, mejorar el rendimiento y garantizar la calidad de los productos, atendiendo tanto al mercado nacional como internacional.",
         about_p3: "La empresa nace para responder a la creciente demanda de productos químicos especializados, eficientes y sostenibles, promoviendo la optimización de recursos y la economía circular en la industria del curtido.",
         about_p4: "Contamos con profesionales comprometidos con ofrecer productos de alta calidad y un servicio que supere las expectativas de nuestros clientes.",
@@ -87,7 +88,7 @@ const translations = {
         collagen_attr_1: "Alta biodisponibilidad",
         collagen_attr_2: "Fácil digestión y absorción",
         collagen_attr_3: "Aplicaciones funcionales",
-        process_title: "Proceso de Hidrólisis:",
+        process_title: "Proceso de Hidrólisis del Colágeno:",
         step_1: "Fibra de colágeno",
         step_2: "Gelatina",
         step_3: "Péptidos",
@@ -105,6 +106,19 @@ const translations = {
         app_4: "Cosmética y cuidado personal",
         app_5: "Nutrición y bienestar",
         app_6: "Aplicaciones industriales",
+
+        // FAQ Section
+        faq_tag: "PREGUNTAS FRECUENTES",
+        faq_title: "Preguntas Frecuentes",
+        faq_subtitle: "Información clave sobre nuestras soluciones, procesos y acompañamiento técnico.",
+        faq_1_q: "¿Qué soluciones ofrece LUSOTEC para la industria del cuero?",
+        faq_1_a: "LUSOTEC ofrece productos químicos y soluciones para diferentes etapas del proceso del cuero, incluyendo ribera y precurtido, recurtición, sintanes y taninos, engrasantes, colorantes, terminación y auxiliares.",
+        faq_2_q: "¿LUSOTEC ofrece asesoría técnica?",
+        faq_2_a: "Sí. LUSOTEC complementa su oferta de productos con asesoría técnica y acompañamiento para identificar alternativas adecuadas a las necesidades y procesos de cada cliente.",
+        faq_3_q: "¿Qué soluciones ofrece LUSOTEC para terminación?",
+        faq_3_a: "LUSOTEC cuenta con soluciones de terminación que incluyen acrílicos, poliuretanos, auxiliares y pigmentos.",
+        faq_4_q: "¿LUSOTEC trabaja con colágeno y derivados?",
+        faq_4_a: "LUSOTEC explora y desarrolla soluciones asociadas al aprovechamiento de materias primas y derivados de origen animal, incluyendo colágeno hidrolizado, gelatina industrial y proteína de vacuno deshidratada.",
 
         // Contact & Form
         contact_tag: "CONTÁCTANOS",
@@ -154,15 +168,16 @@ const translations = {
         // Status messages
         msg_sending: "Enviando consulta...",
         msg_success: "¡Gracias por contactarnos! Tu consulta ha sido registrada exitosamente. Nos comunicaremos contigo a la brevedad.",
-        msg_error: "Hubo un error al enviar el formulario. Por favor, intenta de nuevo o contáctanos directamente por WhatsApp."
+        msg_error: "El servicio de envío automático está en configuración. Por favor, contáctanos directamente a través de WhatsApp (+56 9 5718 1291) o por correo a busma.cuero@gmail.com."
     },
     en: {
-        page_title: "LUSOTEC SPA | Chemical products and technical advice for leather",
+        page_title: "LUSOTEC SPA | Chemical Products & Technical Advice for Leather",
         page_desc: "Specialized chemical products, technical advice and solutions for the leather industry. Discover LUSOTEC SPA solutions.",
         nav_home: "Home",
         nav_about: "Lusotec",
         nav_solutions: "Solutions",
         nav_derivatives: "Leather & Derivatives",
+        nav_faq: "FAQ",
         nav_contact: "Contact",
         cta_header: "Request technical advice",
         language_label: "Language:",
@@ -177,7 +192,7 @@ const translations = {
         // About
         about_tag: "ABOUT US",
         about_title: "Experience and knowledge serving the industry",
-        about_p1: "LUSOTEC specializes in the production and distribution of chemical products, technical advice and innovative solutions for the tanning sector.",
+        about_p1: "LUSOTEC SPA specializes in the production and distribution of chemical products, technical advice and solutions for the leather and tanning industry.",
         about_p2: "Our objective is to optimize resources, improve performance and guarantee product quality, serving both national and international markets.",
         about_p3: "The company was created to respond to the growing demand for specialized, efficient and sustainable chemical products, promoting resource optimization and circular economy principles in the tanning industry.",
         about_p4: "We rely on committed professionals focused on delivering high-quality products and service that exceeds customer expectations.",
@@ -234,7 +249,7 @@ const translations = {
         collagen_attr_1: "High bioavailability",
         collagen_attr_2: "Easy digestion and absorption",
         collagen_attr_3: "Functional applications",
-        process_title: "Hydrolysis Process:",
+        process_title: "Collagen Hydrolysis Process:",
         step_1: "Collagen fibre",
         step_2: "Gelatin",
         step_3: "Peptides",
@@ -252,6 +267,19 @@ const translations = {
         app_4: "Cosmetics and personal care",
         app_5: "Nutrition and wellness",
         app_6: "Industrial applications",
+
+        // FAQ Section
+        faq_tag: "FREQUENTLY ASKED QUESTIONS",
+        faq_title: "Frequently Asked Questions",
+        faq_subtitle: "Key information about our solutions, processes, and technical advice.",
+        faq_1_q: "What solutions does LUSOTEC offer for the leather industry?",
+        faq_1_a: "LUSOTEC offers chemical products and solutions for different stages of the leather making process, including beamhouse & pretanning, retanning, syntans & tannins, fatliquors, dyes, finishing & auxiliaries.",
+        faq_2_q: "Does LUSOTEC offer technical advice?",
+        faq_2_a: "Yes. LUSOTEC complements its product offering with technical advice and support to identify suitable alternatives for each customer's needs and processes.",
+        faq_3_q: "What finishing solutions does LUSOTEC offer?",
+        faq_3_a: "LUSOTEC provides finishing solutions that include acrylics, polyurethanes, auxiliaries, and pigments.",
+        faq_4_q: "Does LUSOTEC work with collagen and derivatives?",
+        faq_4_a: "LUSOTEC explores and develops solutions associated with animal-origin raw materials and derivatives, including hydrolyzed collagen, industrial gelatin, and dehydrated beef protein.",
 
         // Contact & Form
         contact_tag: "CONTACT US",
@@ -301,25 +329,26 @@ const translations = {
         // Status messages
         msg_sending: "Sending inquiry...",
         msg_success: "Thank you for reaching out! Your inquiry has been successfully registered. We will contact you shortly.",
-        msg_error: "There was an error submitting the form. Please try again or contact us directly via WhatsApp."
+        msg_error: "The automated form service is currently being configured. Please contact us directly via WhatsApp (+56 9 5718 1291) or email at busma.cuero@gmail.com."
     }
 };
 
 // Category Subproduct lists in ES and EN
+// Category 5 simplified according to client requirements: Acrílicos, Poliuretanos, Auxiliares, Pigmentos
 const categoryItems = {
     es: {
         1: ["Humectantes", "Desengrasantes", "Auxiliares de píquel", "Basificantes", "Desencalantes", "Bactericidas", "Fungicidas", "Enzimas", "Sulfato de cromo"],
         2: ["Taninos", "Sintanes", "Agentes dispersantes", "Auxiliares de taninos", "Neutralizantes", "Resinas acrílicas", "Agentes de relleno", "Polifosfatos"],
         3: ["Engrasantes aniónicos", "Engrasantes sintéticos", "Engrasantes sulfatados", "Engrasantes sulfitados", "Engrasantes fosfóricos", "Engrasantes con lecitina", "Engrasantes con lanolina", "Engrasantes vegetales", "Engrasantes resistentes al agua"],
         4: ["Colorantes ácidos en polvo", "Colorantes líquidos", "Colorantes complejo metálico"],
-        5: ["Acrílicos", "Poliuretanos", "Ceras", "Auxiliares de terminación", "Acrílicos de impregnación", "Acrílicos microligantes", "Resinas", "Poliuretanos de enganche", "Poliuretanos top brillo"]
+        5: ["Acrílicos", "Poliuretanos", "Auxiliares", "Pigmentos"]
     },
     en: {
         1: ["Humectants", "Degreasers", "Pickle auxiliaries", "Basifying agents", "Deliming agents", "Bactericides", "Fungicides", "Enzymes", "Chromium sulphate"],
         2: ["Tannins", "Syntans", "Dispersing agents", "Tannin auxiliaries", "Neutralizing agents", "Acrylic resins", "Fillers", "Polyphosphates"],
         3: ["Anionic fatliquors", "Synthetic fatliquors", "Sulphated fatliquors", "Sulphited fatliquors", "Phosphoric fatliquors", "Lecithin fatliquors", "Lanolin fatliquors", "Vegetable fatliquors", "Waterproof fatliquors"],
         4: ["Acid powder dyes", "Liquid dyes", "Metal complex dyes"],
-        5: ["Acrylics", "Polyurethanes", "Waxes", "Finishing auxiliaries", "Impregnation acrylics", "Micro-particle acrylics", "Resins", "Adhesion polyurethanes", "Top gloss polyurethanes"]
+        5: ["Acrylics", "Polyurethanes", "Auxiliaries", "Pigments"]
     }
 };
 
@@ -433,7 +462,6 @@ function closeMobileMenu() {
 function selectCategoryAndScroll(categoryName) {
     const select = document.getElementById('area_interes');
     if (select) {
-        // Find matching option or set default
         for (let i = 0; i < select.options.length; i++) {
             if (select.options[i].value === categoryName || select.options[i].text.includes(categoryName)) {
                 select.selectedIndex = i;
@@ -448,7 +476,7 @@ function selectCategoryAndScroll(categoryName) {
 }
 
 // ==========================================================================
-// 5. Contact Form Submission & Google Sheets Integration
+// 5. Contact Form Submission & Webhook Handling (Strict Error Protection)
 // ==========================================================================
 async function handleFormSubmit(e) {
     e.preventDefault();
@@ -457,8 +485,6 @@ async function handleFormSubmit(e) {
     const submitBtn = document.getElementById('form-submit-btn');
 
     const formData = new FormData(form);
-    
-    // Extract UTM Parameters from URL
     const urlParams = new URLSearchParams(window.location.search);
     
     const payload = {
@@ -480,13 +506,30 @@ async function handleFormSubmit(e) {
 
     submitBtn.disabled = true;
     submitBtn.textContent = translations[currentLang].msg_sending;
+    statusDiv.className = 'form-status-msg';
+    statusDiv.style.display = 'none';
+
+    // Replace this URL with your production Google Apps Script Webhook URL after deployment
+    const GOOGLE_SCRIPT_WEBHOOK_URL = 'https://script.google.com/macros/s/AKfycbz_placeholder_lusotec/exec';
+
+    // If webhook is in placeholder mode, do NOT fake success. Report honest status with instant WhatsApp alternative.
+    if (GOOGLE_SCRIPT_WEBHOOK_URL.includes('placeholder')) {
+        setTimeout(() => {
+            statusDiv.className = 'form-status-msg error';
+            statusDiv.style.display = 'block';
+            statusDiv.innerHTML = `
+                <p style="margin-bottom: 8px;">${translations[currentLang].msg_error}</p>
+                <a href="https://wa.me/56957181291?text=${encodeURIComponent('Hola Víctor, envío mi consulta desde la web: ' + payload.mensaje)}" target="_blank" rel="noopener" class="btn btn-whatsapp btn-sm" style="margin-top: 6px;">
+                    💬 ${translations[currentLang].btn_wa} (+56 9 5718 1291)
+                </a>
+            `;
+            submitBtn.disabled = false;
+            submitBtn.textContent = translations[currentLang].btn_send;
+        }, 600);
+        return;
+    }
 
     try {
-        // GOOGLE SHEETS APPS SCRIPT WEBHOOK ENDPOINT
-        // Replace this URL with your published Google Apps Script Webhook URL
-        const GOOGLE_SCRIPT_WEBHOOK_URL = 'https://script.google.com/macros/s/AKfycbz_placeholder_lusotec/exec';
-
-        // Attempt fetch with fallback handling
         const response = await fetch(GOOGLE_SCRIPT_WEBHOOK_URL, {
             method: 'POST',
             mode: 'no-cors',
@@ -494,16 +537,20 @@ async function handleFormSubmit(e) {
             body: JSON.stringify(payload)
         });
 
-        // Show success status message
         statusDiv.className = 'form-status-msg success';
+        statusDiv.style.display = 'block';
         statusDiv.textContent = translations[currentLang].msg_success;
         form.reset();
     } catch (err) {
-        console.warn('Network submit info:', err);
-        // Display graceful success / info message
-        statusDiv.className = 'form-status-msg success';
-        statusDiv.textContent = translations[currentLang].msg_success;
-        form.reset();
+        console.error('Form submit error:', err);
+        statusDiv.className = 'form-status-msg error';
+        statusDiv.style.display = 'block';
+        statusDiv.innerHTML = `
+            <p style="margin-bottom: 8px;">${translations[currentLang].msg_error}</p>
+            <a href="https://wa.me/56957181291?text=${encodeURIComponent('Hola Víctor, envío mi consulta desde la web: ' + payload.mensaje)}" target="_blank" rel="noopener" class="btn btn-whatsapp btn-sm" style="margin-top: 6px;">
+                💬 ${translations[currentLang].btn_wa} (+56 9 5718 1291)
+            </a>
+        `;
     } finally {
         submitBtn.disabled = false;
         submitBtn.textContent = translations[currentLang].btn_send;
@@ -511,56 +558,7 @@ async function handleFormSubmit(e) {
 }
 
 // ==========================================================================
-// 6. SVG QR Code Generator for lusotec.cl/landing-v1/
-// ==========================================================================
-function renderQRCodeSVG() {
-    const container = document.getElementById('qr-container');
-    if (!container) return;
-
-    // Clean inline SVG representation of QR code pointing to https://www.lusotec.cl/landing-v1/
-    const qrSvg = `
-    <svg viewBox="0 0 100 100" fill="#0f1c3f" xmlns="http://www.w3.org/2000/svg">
-        <rect width="100" height="100" fill="white"/>
-        <!-- Top Left Corner Marker -->
-        <rect x="10" y="10" width="25" height="25" fill="#0f1c3f"/>
-        <rect x="15" y="15" width="15" height="15" fill="white"/>
-        <rect x="18" y="18" width="9" height="9" fill="#0fa6a0"/>
-        
-        <!-- Top Right Corner Marker -->
-        <rect x="65" y="10" width="25" height="25" fill="#0f1c3f"/>
-        <rect x="70" y="15" width="15" height="15" fill="white"/>
-        <rect x="73" y="18" width="9" height="9" fill="#0fa6a0"/>
-
-        <!-- Bottom Left Corner Marker -->
-        <rect x="10" y="65" width="25" height="25" fill="#0f1c3f"/>
-        <rect x="15" y="70" width="15" height="15" fill="white"/>
-        <rect x="18" y="73" width="9" height="9" fill="#0fa6a0"/>
-
-        <!-- Data Pattern Modules -->
-        <rect x="42" y="12" width="6" height="6" fill="#0f1c3f"/>
-        <rect x="50" y="12" width="6" height="6" fill="#0fa6a0"/>
-        <rect x="42" y="24" width="6" height="6" fill="#0f1c3f"/>
-        <rect x="52" y="28" width="6" height="6" fill="#0f1c3f"/>
-        
-        <rect x="12" y="42" width="6" height="6" fill="#0fa6a0"/>
-        <rect x="22" y="42" width="6" height="6" fill="#0f1c3f"/>
-        <rect x="32" y="42" width="6" height="6" fill="#0fa6a0"/>
-        <rect x="42" y="42" width="16" height="16" fill="#0f1c3f"/>
-        <rect x="65" y="42" width="8" height="8" fill="#0fa6a0"/>
-        <rect x="78" y="42" width="8" height="8" fill="#0f1c3f"/>
-
-        <rect x="42" y="65" width="6" height="6" fill="#0fa6a0"/>
-        <rect x="52" y="70" width="6" height="6" fill="#0f1c3f"/>
-        <rect x="65" y="65" width="25" height="25" fill="#0f1c3f"/>
-        <rect x="70" y="70" width="15" height="15" fill="white"/>
-        <rect x="73" y="73" width="9" height="9" fill="#0fa6a0"/>
-    </svg>`;
-
-    container.innerHTML = qrSvg;
-}
-
-// ==========================================================================
-// 7. Active Nav Link Scroll Observer
+// 6. Active Nav Link Scroll Observer
 // ==========================================================================
 function initScrollObserver() {
     const sections = document.querySelectorAll('section[id]');
@@ -586,10 +584,9 @@ function initScrollObserver() {
 }
 
 // ==========================================================================
-// 8. Initialization
+// 7. Initialization
 // ==========================================================================
 document.addEventListener('DOMContentLoaded', () => {
     switchLanguage(currentLang);
-    renderQRCodeSVG();
     initScrollObserver();
 });
