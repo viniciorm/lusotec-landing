@@ -1,181 +1,187 @@
 /**
- * Lusotec Landing - Particle Animation & Interactive Effects
+ * LUSOTEC SPA - Landing Page V1 Script
+ * Handles Mobile Navigation Drawer, Category Selection, Active Scroll Observer,
+ * Google Sheets Form Submission Handler with Error Protection, and UTM Parameter Tracking.
+ * Dual-Language support (ES | EN) is statically rendered in independent HTML pages.
  */
 
-(function () {
-    'use strict';
+// ==========================================================================
+// 1. Language Detection & Status Messages
+// ==========================================================================
+const currentLang = (document.documentElement.lang && document.documentElement.lang.toLowerCase().startsWith('en')) ? 'en' : 'es';
 
-    // ===== Particle System =====
-    const canvas = document.getElementById('particles-canvas');
-    const ctx = canvas.getContext('2d');
-    let particles = [];
-    let mouse = { x: null, y: null };
-    let animationId;
-
-    function resizeCanvas() {
-        canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight;
+const formMessages = {
+    es: {
+        msg_sending: "Enviando consulta...",
+        msg_success: "¡Gracias por contactarnos! Tu consulta ha sido registrada exitosamente. Nos comunicaremos contigo a la brevedad.",
+        msg_error: "Hubo un problema al enviar el formulario. Por favor, intenta nuevamente o contáctanos por WhatsApp.",
+        btn_send: "Enviar consulta",
+        btn_wa: "Contactar por WhatsApp"
+    },
+    en: {
+        msg_sending: "Sending inquiry...",
+        msg_success: "Thank you for reaching out! Your inquiry has been successfully registered. We will contact you shortly.",
+        msg_error: "There was a problem submitting the form. Please try again or contact us via WhatsApp.",
+        btn_send: "Send inquiry",
+        btn_wa: "Contact via WhatsApp"
     }
+};
 
-    class Particle {
-        constructor() {
-            this.reset();
-        }
+// ==========================================================================
+// 2. Mobile Navigation Drawer
+// ==========================================================================
+const menuToggle = document.getElementById('menu-toggle');
+const navMobile = document.getElementById('nav-mobile');
 
-        reset() {
-            this.x = Math.random() * canvas.width;
-            this.y = Math.random() * canvas.height;
-            this.size = Math.random() * 2 + 0.5;
-            this.speedX = (Math.random() - 0.5) * 0.4;
-            this.speedY = (Math.random() - 0.5) * 0.4;
-            this.opacity = Math.random() * 0.5 + 0.1;
-            this.targetOpacity = this.opacity;
-            // Teal color with slight variation
-            const hue = 175 + Math.random() * 15;
-            const saturation = 60 + Math.random() * 20;
-            const lightness = 50 + Math.random() * 20;
-            this.color = `hsla(${hue}, ${saturation}%, ${lightness}%, `;
-        }
+if (menuToggle && navMobile) {
+    menuToggle.addEventListener('click', () => {
+        menuToggle.classList.toggle('active');
+        navMobile.classList.toggle('active');
+    });
+}
 
-        update() {
-            this.x += this.speedX;
-            this.y += this.speedY;
+function closeMobileMenu() {
+    if (menuToggle && navMobile) {
+        menuToggle.classList.remove('active');
+        navMobile.classList.remove('active');
+    }
+}
 
-            // Mouse interaction
-            if (mouse.x !== null && mouse.y !== null) {
-                const dx = mouse.x - this.x;
-                const dy = mouse.y - this.y;
-                const dist = Math.sqrt(dx * dx + dy * dy);
-                if (dist < 150) {
-                    const force = (150 - dist) / 150;
-                    this.speedX -= (dx / dist) * force * 0.02;
-                    this.speedY -= (dy / dist) * force * 0.02;
-                    this.targetOpacity = Math.min(0.8, this.opacity + force * 0.3);
-                } else {
-                    this.targetOpacity = this.opacity;
-                }
+// ==========================================================================
+// 3. Category CTA Selection Handler
+// ==========================================================================
+function selectCategoryAndScroll(categoryName) {
+    const select = document.getElementById('area_interes');
+    if (select) {
+        let matched = false;
+        for (let i = 0; i < select.options.length; i++) {
+            const optVal = select.options[i].value.toLowerCase();
+            const optText = select.options[i].text.toLowerCase();
+            const target = categoryName.toLowerCase();
+
+            if (optVal === target || optText === target || optVal.includes(target) || target.includes(optVal)) {
+                select.selectedIndex = i;
+                matched = true;
+                break;
             }
-
-            // Smooth opacity transition
-            this.opacity += (this.targetOpacity - this.opacity) * 0.05;
-
-            // Speed dampening
-            this.speedX *= 0.999;
-            this.speedY *= 0.999;
-
-            // Wrap around edges
-            if (this.x < -10) this.x = canvas.width + 10;
-            if (this.x > canvas.width + 10) this.x = -10;
-            if (this.y < -10) this.y = canvas.height + 10;
-            if (this.y > canvas.height + 10) this.y = -10;
         }
-
-        draw() {
-            ctx.beginPath();
-            ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-            ctx.fillStyle = this.color + this.opacity + ')';
-            ctx.fill();
-        }
-    }
-
-    function createParticles() {
-        const count = Math.min(80, Math.floor((canvas.width * canvas.height) / 15000));
-        particles = [];
-        for (let i = 0; i < count; i++) {
-            particles.push(new Particle());
-        }
-    }
-
-    function drawConnections() {
-        for (let i = 0; i < particles.length; i++) {
-            for (let j = i + 1; j < particles.length; j++) {
-                const dx = particles[i].x - particles[j].x;
-                const dy = particles[i].y - particles[j].y;
-                const dist = Math.sqrt(dx * dx + dy * dy);
-
-                if (dist < 120) {
-                    const opacity = (1 - dist / 120) * 0.15;
-                    ctx.beginPath();
-                    ctx.strokeStyle = `rgba(15, 166, 160, ${opacity})`;
-                    ctx.lineWidth = 0.5;
-                    ctx.moveTo(particles[i].x, particles[i].y);
-                    ctx.lineTo(particles[j].x, particles[j].y);
-                    ctx.stroke();
+        if (!matched && select.options.length > 0) {
+            // Fallback matching
+            for (let i = 0; i < select.options.length; i++) {
+                if (select.options[i].value.toLowerCase().includes(categoryName.substring(0, 5).toLowerCase())) {
+                    select.selectedIndex = i;
+                    break;
                 }
             }
         }
     }
-
-    function animate() {
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-        particles.forEach(p => {
-            p.update();
-            p.draw();
-        });
-
-        drawConnections();
-        animationId = requestAnimationFrame(animate);
+    const contactSection = document.getElementById('contacto');
+    if (contactSection) {
+        contactSection.scrollIntoView({ behavior: 'smooth' });
     }
+}
 
-    // ===== Event Listeners =====
-    window.addEventListener('resize', () => {
-        resizeCanvas();
-        createParticles();
-    });
+// ==========================================================================
+// 4. Contact Form Submission & Webhook Handling (Strict Error Protection)
+// ==========================================================================
+async function handleFormSubmit(e) {
+    e.preventDefault();
+    const form = e.target;
+    const statusDiv = document.getElementById('form-status');
+    const submitBtn = document.getElementById('form-submit-btn');
+    const msgs = formMessages[currentLang] || formMessages.es;
 
-    window.addEventListener('mousemove', (e) => {
-        mouse.x = e.clientX;
-        mouse.y = e.clientY;
-    });
-
-    window.addEventListener('mouseleave', () => {
-        mouse.x = null;
-        mouse.y = null;
-    });
-
-    // Touch support
-    window.addEventListener('touchmove', (e) => {
-        if (e.touches.length > 0) {
-            mouse.x = e.touches[0].clientX;
-            mouse.y = e.touches[0].clientY;
-        }
-    });
-
-    window.addEventListener('touchend', () => {
-        mouse.x = null;
-        mouse.y = null;
-    });
-
-    // ===== Initialize =====
-    resizeCanvas();
-    createParticles();
-    animate();
-
-    // ===== Intersection Observer for scroll animations =====
-    const observerOptions = {
-        threshold: 0.1,
-        rootMargin: '0px 0px -50px 0px'
+    const formData = new FormData(form);
+    const urlParams = new URLSearchParams(window.location.search);
+    
+    const payload = {
+        timestamp: new Date().toISOString(),
+        idioma: currentLang,
+        nombre: formData.get('nombre') || '',
+        empresa: formData.get('empresa') || '',
+        pais_ciudad: formData.get('pais_ciudad') || '',
+        telefono: formData.get('telefono') || '',
+        email: formData.get('email') || '',
+        area_interes: formData.get('area_interes') || '',
+        mensaje: formData.get('mensaje') || '',
+        consentimiento: formData.get('consentimiento') ? 'Sí' : 'No',
+        source: 'landing_lusotec',
+        utm_source: urlParams.get('utm_source') || '',
+        utm_medium: urlParams.get('utm_medium') || '',
+        utm_campaign: urlParams.get('utm_campaign') || ''
     };
 
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add('visible');
+    submitBtn.disabled = true;
+    submitBtn.textContent = msgs.msg_sending;
+    statusDiv.className = 'form-status-msg';
+    statusDiv.style.display = 'none';
+
+    // Definitive Google Apps Script Webhook URL
+    const GOOGLE_SCRIPT_WEBHOOK_URL = 'https://script.google.com/macros/s/AKfycbwJrdIE4B6m5AIqhfQXOumiFo3fKLmbuyIKUfthtVJAiQlGFXDLQ9risD-sANkqlsB3xw/exec';
+
+    try {
+        await fetch(GOOGLE_SCRIPT_WEBHOOK_URL, {
+            method: 'POST',
+            mode: 'no-cors',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(payload)
+        });
+
+        statusDiv.className = 'form-status-msg success';
+        statusDiv.style.display = 'block';
+        statusDiv.textContent = msgs.msg_success;
+        form.reset();
+    } catch (err) {
+        console.error('Form submit error:', err);
+        statusDiv.className = 'form-status-msg error';
+        statusDiv.style.display = 'block';
+        const waMsg = currentLang === 'en' 
+            ? 'Hello Victor, I sent my message from the website: ' + payload.mensaje
+            : 'Hola Víctor, envío mi consulta desde la web: ' + payload.mensaje;
+
+        statusDiv.innerHTML = `
+            <p style="margin-bottom: 8px;">${msgs.msg_error}</p>
+            <a href="https://wa.me/56957181291?text=${encodeURIComponent(waMsg)}" target="_blank" rel="noopener" class="btn btn-whatsapp btn-sm" style="margin-top: 6px;">
+                💬 ${msgs.btn_wa} (+56 9 5718 1291)
+            </a>
+        `;
+    } finally {
+        submitBtn.disabled = false;
+        submitBtn.textContent = msgs.btn_send;
+    }
+}
+
+// ==========================================================================
+// 5. Active Nav Link Scroll Observer
+// ==========================================================================
+function initScrollObserver() {
+    const sections = document.querySelectorAll('section[id]');
+    const navLinks = document.querySelectorAll('.nav-link');
+
+    if (sections.length === 0 || navLinks.length === 0) return;
+
+    window.addEventListener('scroll', () => {
+        let current = '';
+        sections.forEach(section => {
+            const sectionTop = section.offsetTop - 120;
+            const sectionHeight = section.offsetHeight;
+            if (window.scrollY >= sectionTop && window.scrollY < sectionTop + sectionHeight) {
+                current = section.getAttribute('id');
             }
         });
-    }, observerOptions);
 
-    document.querySelectorAll('.container > *').forEach(el => {
-        observer.observe(el);
+        navLinks.forEach(link => {
+            link.classList.remove('active');
+            if (link.getAttribute('href') === `#${current}`) {
+                link.classList.add('active');
+            }
+        });
     });
+}
 
-    // ===== Cleanup on page hide =====
-    document.addEventListener('visibilitychange', () => {
-        if (document.hidden) {
-            cancelAnimationFrame(animationId);
-        } else {
-            animate();
-        }
-    });
-})();
+// ==========================================================================
+// 6. Initialization
+// ==========================================================================
+document.addEventListener('DOMContentLoaded', () => {
+    initScrollObserver();
+});

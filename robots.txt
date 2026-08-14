@@ -2,8 +2,9 @@
 
 User-agent: *
 Allow: /
+Allow: /en/
 
-# Keep private development environments hidden from crawlers
+# Keep private review route non-indexed
 Disallow: /landing-v1/
 
 Sitemap: https://www.lusotec.cl/sitemap.xml
