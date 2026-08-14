@@ -1,14 +1,15 @@
 # 🚀 Manual de Puesta en Producción — LUSOTEC SPA (`lusotec.cl`)
 
-Este documento contiene el procedimiento paso a paso para pasar la **Landing Page V1** desde el entorno privado (`/landing-v1/`) al dominio principal productivo (`https://www.lusotec.cl/`).
+Este documento contiene el procedimiento paso a paso para pasar la **Landing Page V1 Bilingüe** desde el entorno privado de desarrollo (`/landing-v1/` y `/landing-v1/en/`) al dominio principal productivo (`https://www.lusotec.cl/` y `https://www.lusotec.cl/en/`).
 
 ---
 
 ## 📌 Estado Actual (Desarrollo / Revisión)
 
-- **URL de revisión privada**: `https://www.lusotec.cl/landing-v1/` (o `https://lusotec-landing.vercel.app/landing-v1/`)
-- **Directorio en servidor/repo**: `/landing-v1/`
-- **Protección SEO temporal**: Contiene `<meta name="robots" content="noindex, nofollow">`
+- **Versión Española (Desarrollo)**: `https://www.lusotec.cl/landing-v1/`
+- **Versión Inglesa (Desarrollo)**: `https://www.lusotec.cl/landing-v1/en/`
+- **Directorio en repositorio**: `/landing-v1/index.html` y `/landing-v1/en/index.html`
+- **Protección SEO temporal**: Ambas páginas contienen `<meta name="robots" content="noindex, nofollow">`
 
 ---
 
@@ -19,111 +20,71 @@ Este documento contiene el procedimiento paso a paso para pasar la **Landing Pag
 - [ ] **Respaldar configuración actual**: Guardar copia de `.htaccess`, reglas de redirección de Vercel (`vercel.json`), o configuraciones de servidor.
 
 ### 2. Migración de Archivos
-- [ ] **Mover archivos al root**: Copiar o mover todo el contenido dentro de la carpeta `/landing-v1/` a la raíz principal `/` (o `public_html/`):
-  - `index.html`
+- [ ] **Mover versión Española al root**: Copiar todo el contenido de `/landing-v1/` a la raíz principal `/` (o `public_html/`):
+  - `index.html` (Español)
   - `style.css`
   - `script.js`
   - `vcard-victor.vcf`
-  - `assets/` (`logo-lusotec.jpg`, `leather-bg.jpg`, `lab-bg.jpg`)
+  - `assets/` (`logo-lusotec.jpg`, `leather-bg.jpg`, `lab-bg.jpg`, `qr-lusotec-prod.svg`, etc.)
+- [ ] **Mover versión Inglesa a `/en/`**: Copiar `/landing-v1/en/index.html` a la subcarpeta `/en/index.html`.
 
 ### 3. Ajustes de Código para Producción
 
-- [ ] **Retirar `noindex, nofollow`**: En `index.html` cambiar:
+#### En `https://www.lusotec.cl/index.html` (Español):
+- [ ] **Retirar `noindex, nofollow`**:
   ```html
-  <!-- ANTES: -->
-  <meta name="robots" content="noindex, nofollow">
-  <!-- DESPUÉS: -->
   <meta name="robots" content="index, follow">
   ```
-
-- [ ] **Actualizar URL Canonical**: En `index.html` cambiar:
+- [ ] **Actualizar Canonical Tag**:
   ```html
   <link rel="canonical" href="https://www.lusotec.cl/">
   ```
-
-- [ ] **Actualizar Open Graph URL & Image**:
+- [ ] **Actualizar Hreflang Tags**:
+  ```html
+  <link rel="alternate" hreflang="es" href="https://www.lusotec.cl/">
+  <link rel="alternate" hreflang="en" href="https://www.lusotec.cl/en/">
+  <link rel="alternate" hreflang="x-default" href="https://www.lusotec.cl/">
+  ```
+- [ ] **Actualizar Open Graph**:
   ```html
   <meta property="og:url" content="https://www.lusotec.cl/">
   <meta property="og:image" content="https://www.lusotec.cl/assets/logo-lusotec.jpg">
   ```
+- [ ] **Actualizar Código QR**: Reemplazar la imagen QR por `assets/qr-lusotec-prod.svg` apuntando a `https://www.lusotec.cl/`.
 
-- [ ] **Actualizar URL del Código QR**: En `script.js`, en la función `renderQRCodeSVG()` o en el texto descriptivo del QR, cambiar la URL mostrada de `https://www.lusotec.cl/landing-v1/` a `https://www.lusotec.cl/`.
-
-- [ ] **Conectar Google Sheets Webhook definitivo**:
-  En `script.js`, dentro de `handleFormSubmit(e)`, reemplazar `GOOGLE_SCRIPT_WEBHOOK_URL` por el ejecutable definitivo de Google Apps Script:
-  ```js
-  const GOOGLE_SCRIPT_WEBHOOK_URL = 'https://script.google.com/macros/s/TU_WEBHOOK_ID_REAL/exec';
+#### En `https://www.lusotec.cl/en/index.html` (Inglés):
+- [ ] **Retirar `noindex, nofollow`**:
+  ```html
+  <meta name="robots" content="index, follow">
   ```
-
-### 4. SEO & Indexación
-- [ ] **Crear o actualizar `robots.txt`**:
-  ```text
-  User-agent: *
-  Allow: /
-  Sitemap: https://www.lusotec.cl/sitemap.xml
+- [ ] **Actualizar Canonical Tag**:
+  ```html
+  <link rel="canonical" href="https://www.lusotec.cl/en/">
   ```
-- [ ] **Crear o actualizar `sitemap.xml`**:
-  ```xml
-  <?xml version="1.0" encoding="UTF-8"?>
-  <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-    <url>
-      <loc>https://www.lusotec.cl/</loc>
-      <lastmod>2026-08-13</lastmod>
-      <changefreq>monthly</changefreq>
-      <priority>1.0</priority>
-    </url>
-  </urlset>
+- [ ] **Actualizar Hreflang Tags**:
+  ```html
+  <link rel="alternate" hreflang="es" href="https://www.lusotec.cl/">
+  <link rel="alternate" hreflang="en" href="https://www.lusotec.cl/en/">
+  <link rel="alternate" hreflang="x-default" href="https://www.lusotec.cl/">
   ```
-
-### 5. Verificación & Pruebas Finales
-- [ ] **Probar Formulario de Contacto**: Enviar una solicitud de prueba en español y otra en inglés. Verificar que los datos lleguen correctamente a Google Sheets con la columna `source = landing_lusotec` y los parámetros UTM.
-- [ ] **Probar WhatsApp**: Hacer clic en el botón flotante y verificar que abra WhatsApp con el mensaje prellenado en el idioma correspondiente.
-- [ ] **Probar vCard**: Hacer clic en "Guardar contacto" y verificar que descargue `vcard-victor.vcf` con los datos completos de Víctor Marques Ferreira.
-- [ ] **Probar Selector de Idiomas (ES | EN)**: Cambiar de idioma varias veces y refrescar la página para validar que persista el idioma seleccionado en `localStorage`.
-- [ ] **Comprobar HTTPS & Certificado SSL**: Asegurar que `https://lusotec.cl` cargue con candado verde sin advertencias de contenido mixto.
-- [ ] **Limpiar Caché**: Purgar la caché de CDN, Vercel y del navegador.
-- [ ] **Verificar Responsividad**: Probar el sitio en dispositivos móviles (iOS, Android), tablets y navegadores desktop (Chrome, Safari, Firefox, Edge).
+- [ ] **Actualizar Open Graph**:
+  ```html
+  <meta property="og:url" content="https://www.lusotec.cl/en/">
+  <meta property="og:image" content="https://www.lusotec.cl/assets/logo-lusotec.jpg">
+  ```
+- [ ] **Actualizar Código QR**: Reemplazar la imagen QR por `../assets/qr-lusotec-prod.svg` apuntando a `https://www.lusotec.cl/`.
 
 ---
 
-## 📊 Integración con Google Sheets (Google Apps Script)
+## 📊 Integración con Google Sheets
 
-Para activar el guardado automático de contactos en Google Sheets:
-
-1. Abre Google Sheets y crea una hoja llamada **"Contactos Lusotec"**.
-2. Agrega los encabezados en la Fila 1:
-   `timestamp | idioma | nombre | empresa | pais_ciudad | telefono | email | area_interes | mensaje | consentimiento | source | utm_source | utm_medium | utm_campaign`
-3. Ve a **Extensiones → Apps Script** y pega la siguiente función:
-   ```javascript
-   function doPost(e) {
-     var sheet = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
-     var data = JSON.parse(e.postData.contents);
-     sheet.appendRow([
-       data.timestamp,
-       data.idioma,
-       data.nombre,
-       data.empresa,
-       data.pais_ciudad,
-       data.telefono,
-       data.email,
-       data.area_interes,
-       data.mensaje,
-       data.consentimiento,
-       data.source,
-       data.utm_source,
-       data.utm_medium,
-       data.utm_campaign
-     ]);
-     return ContentService.createTextOutput(JSON.stringify({"result": "success"}))
-       .setMimeType(ContentService.MimeType.JSON);
-   }
-   ```
-4. Haz clic en **Desplegar → Nuevo despliegue → Aplicación Web**.
-5. Configura:
-   - **Ejecutar como**: Tu cuenta.
-   - **Quién tiene acceso**: *Cualquier persona (Anyone)*.
-6. Copia la URL del despliegue y pégala en `script.js` en la constante `GOOGLE_SCRIPT_WEBHOOK_URL`.
+El webhook configurado en `script.js` procesa formularios de ambas páginas de manera unificada:
+- **Webhook URL**: `https://script.google.com/macros/s/AKfycbwJrdIE4B6m5AIqhfQXOumiFo3fKLmbuyIKUfthtVJAiQlGFXDLQ9risD-sANkqlsB3xw/exec`
+- **Pestaña destino**: `Leads Landing`
+- **Comportamiento por idioma**:
+  - `ES`: Registra `idioma = es` y áreas de interés en español (ej. `Terminación y auxiliares`).
+  - `EN`: Registra `idioma = en` y áreas de interés en inglés (ej. `Finishing & Auxiliaries`).
 
 ---
 
-© 2026 LUSOTEC SPA — Guía técnica de despliegue.
+© 2026 LUSOTEC SPA — Guía técnica de despliegue bilingüe.
