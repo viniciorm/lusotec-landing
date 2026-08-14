@@ -509,28 +509,11 @@ async function handleFormSubmit(e) {
     statusDiv.className = 'form-status-msg';
     statusDiv.style.display = 'none';
 
-    // Replace this URL with your production Google Apps Script Webhook URL after deployment
-    const GOOGLE_SCRIPT_WEBHOOK_URL = 'https://script.google.com/macros/s/AKfycbz_placeholder_lusotec/exec';
-
-    // If webhook is in placeholder mode, do NOT fake success. Report honest status with instant WhatsApp alternative.
-    if (GOOGLE_SCRIPT_WEBHOOK_URL.includes('placeholder')) {
-        setTimeout(() => {
-            statusDiv.className = 'form-status-msg error';
-            statusDiv.style.display = 'block';
-            statusDiv.innerHTML = `
-                <p style="margin-bottom: 8px;">${translations[currentLang].msg_error}</p>
-                <a href="https://wa.me/56957181291?text=${encodeURIComponent('Hola Víctor, envío mi consulta desde la web: ' + payload.mensaje)}" target="_blank" rel="noopener" class="btn btn-whatsapp btn-sm" style="margin-top: 6px;">
-                    💬 ${translations[currentLang].btn_wa} (+56 9 5718 1291)
-                </a>
-            `;
-            submitBtn.disabled = false;
-            submitBtn.textContent = translations[currentLang].btn_send;
-        }, 600);
-        return;
-    }
+    // Definitive Google Apps Script Webhook URL
+    const GOOGLE_SCRIPT_WEBHOOK_URL = 'https://script.google.com/macros/s/AKfycbwJrdIE4B6m5AIqhfQXOumiFo3fKLmbuyIKUfthtVJAiQlGFXDLQ9risD-sANkqlsB3xw/exec';
 
     try {
-        const response = await fetch(GOOGLE_SCRIPT_WEBHOOK_URL, {
+        await fetch(GOOGLE_SCRIPT_WEBHOOK_URL, {
             method: 'POST',
             mode: 'no-cors',
             headers: { 'Content-Type': 'application/json' },
