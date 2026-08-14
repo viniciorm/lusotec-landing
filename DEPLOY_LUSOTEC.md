@@ -1,40 +1,44 @@
 # 🚀 Manual de Puesta en Producción — LUSOTEC SPA (`lusotec.cl`)
 
-Este documento contiene el procedimiento paso a paso para pasar la **Landing Page V1 Bilingüe** desde el entorno privado de desarrollo (`/landing-v1/` y `/landing-v1/en/`) al dominio principal productivo (`https://www.lusotec.cl/` y `https://www.lusotec.cl/en/`).
+Este documento contiene el procedimiento paso a paso de **6 Fases** para desplegar la **Landing Page V1 Bilingüe** desde el entorno privado de desarrollo (`/landing-v1/` y `/landing-v1/en/`) al dominio principal productivo (`https://www.lusotec.cl/` y `https://www.lusotec.cl/en/`).
 
 ---
 
-## 📌 Estado Actual (Desarrollo / Revisión)
+## 📌 Estado Actual (Desarrollo / Pre-Deploy)
 
 - **Versión Española (Desarrollo)**: `https://www.lusotec.cl/landing-v1/`
 - **Versión Inglesa (Desarrollo)**: `https://www.lusotec.cl/landing-v1/en/`
-- **Directorio en repositorio**: `/landing-v1/index.html` y `/landing-v1/en/index.html`
+- **Archivos en repositorio**: `/landing-v1/index.html` y `/landing-v1/en/index.html`
 - **Protección SEO temporal**: Ambas páginas contienen `<meta name="robots" content="noindex, nofollow">`
+- **Dominio principal `lusotec.cl`**: Mantiene la página en construcción sin cambios.
 
 ---
 
-## 📋 Checklist Paso a Paso para Producción
+## 📋 Checklist de 6 Fases para el Despliegue a Producción
 
-### 1. Respaldos Preventivos
+### FASE 1 — Respaldos (Backup)
 - [ ] **Respaldar el sitio actual**: Crear una copia de seguridad comprimida (ZIP) de los archivos en la raíz `/` o `public_html/`.
-- [ ] **Respaldar configuración actual**: Guardar copia de `.htaccess`, reglas de redirección de Vercel (`vercel.json`), o configuraciones de servidor.
+- [ ] **Respaldar archivos de producción**: Guardar copia de archivos existentes en el hosting/servidor.
+- [ ] **Respaldar configuración**: Guardar copia de `.htaccess`, reglas de redirección de Vercel (`vercel.json`), o configuraciones de servidor.
 
-### 2. Migración de Archivos
-- [ ] **Mover versión Española al root**: Copiar todo el contenido de `/landing-v1/` a la raíz principal `/` (o `public_html/`):
+### FASE 2 — Migración de Archivos
+- [ ] **Copiar versión Española al root**: Copiar todo el contenido de `/landing-v1/` a la raíz principal `/` (o `public_html/`):
   - `index.html` (Español)
   - `style.css`
   - `script.js`
   - `vcard-victor.vcf`
-  - `assets/` (`logo-lusotec.jpg`, `leather-bg.jpg`, `lab-bg.jpg`, `qr-lusotec-prod.svg`, etc.)
-- [ ] **Mover versión Inglesa a `/en/`**: Copiar `/landing-v1/en/index.html` a la subcarpeta `/en/index.html`.
+  - `assets/` (`logo-lusotec.webp`, `logo-lusotec.jpg`, `leather-bg.webp`, `leather-bg.jpg`, `lab-bg.webp`, `lab-bg.jpg`, `qr-lusotec-prod.svg`, etc.)
+- [ ] **Crear directorio `/en/` y copiar versión Inglesa**:
+  - Crear la carpeta `/en/` en la raíz de producción.
+  - Copiar `/landing-v1/en/index.html` a `/en/index.html`.
+- [ ] **Copiar archivos globales de la raíz**:
+  - Copiar `llms.txt` a la raíz `/llms.txt`.
+  - Copiar `robots.txt` a la raíz `/robots.txt`.
+  - Copiar `sitemap.xml` a la raíz `/sitemap.xml`.
 
-### 3. Ajustes de Código para Producción
+### FASE 3 — Ajustes SEO & Metadatos de Producción
 
 #### En `https://www.lusotec.cl/index.html` (Español):
-- [ ] **Retirar `noindex, nofollow`**:
-  ```html
-  <meta name="robots" content="index, follow">
-  ```
 - [ ] **Actualizar Canonical Tag**:
   ```html
   <link rel="canonical" href="https://www.lusotec.cl/">
@@ -45,18 +49,17 @@ Este documento contiene el procedimiento paso a paso para pasar la **Landing Pag
   <link rel="alternate" hreflang="en" href="https://www.lusotec.cl/en/">
   <link rel="alternate" hreflang="x-default" href="https://www.lusotec.cl/">
   ```
-- [ ] **Actualizar Open Graph**:
+- [ ] **Cambiar Robots Directive**:
   ```html
-  <meta property="og:url" content="https://www.lusotec.cl/">
-  <meta property="og:image" content="https://www.lusotec.cl/assets/logo-lusotec.jpg">
-  ```
-- [ ] **Actualizar Código QR**: Reemplazar la imagen QR por `assets/qr-lusotec-prod.svg` apuntando a `https://www.lusotec.cl/`.
-
-#### En `https://www.lusotec.cl/en/index.html` (Inglés):
-- [ ] **Retirar `noindex, nofollow`**:
-  ```html
+  <!-- Cambiar noindex,nofollow por: -->
   <meta name="robots" content="index, follow">
   ```
+- [ ] **Actualizar Open Graph & Schema URLs**:
+  - `og:url` → `https://www.lusotec.cl/`
+  - `og:image` → `https://www.lusotec.cl/assets/logo-lusotec.jpg`
+  - FAQ ID → `https://www.lusotec.cl/#faq`
+
+#### En `https://www.lusotec.cl/en/index.html` (Inglés):
 - [ ] **Actualizar Canonical Tag**:
   ```html
   <link rel="canonical" href="https://www.lusotec.cl/en/">
@@ -67,23 +70,46 @@ Este documento contiene el procedimiento paso a paso para pasar la **Landing Pag
   <link rel="alternate" hreflang="en" href="https://www.lusotec.cl/en/">
   <link rel="alternate" hreflang="x-default" href="https://www.lusotec.cl/">
   ```
-- [ ] **Actualizar Open Graph**:
+- [ ] **Cambiar Robots Directive**:
   ```html
-  <meta property="og:url" content="https://www.lusotec.cl/en/">
-  <meta property="og:image" content="https://www.lusotec.cl/assets/logo-lusotec.jpg">
+  <!-- Cambiar noindex,nofollow por: -->
+  <meta name="robots" content="index, follow">
   ```
-- [ ] **Actualizar Código QR**: Reemplazar la imagen QR por `../assets/qr-lusotec-prod.svg` apuntando a `https://www.lusotec.cl/`.
+- [ ] **Actualizar Open Graph & Schema URLs**:
+  - `og:url` → `https://www.lusotec.cl/en/`
+  - `og:image` → `https://www.lusotec.cl/assets/logo-lusotec.jpg`
+  - FAQ ID → `https://www.lusotec.cl/en/#faq`
 
----
+### FASE 4 — Reemplazo del Código QR
+- [ ] **En `index.html` (Español)**: Reemplazar la imagen del QR por `assets/qr-lusotec-prod.svg` apuntando a `https://www.lusotec.cl/`.
+- [ ] **En `/en/index.html` (Inglés)**: Reemplazar la imagen del QR por `../assets/qr-lusotec-prod.svg` apuntando a `https://www.lusotec.cl/`.
 
-## 📊 Integración con Google Sheets
+### FASE 5 — Pruebas Finales (Testing)
+- [ ] **Probar URLs en navegador**:
+  - Probar `https://www.lusotec.cl/`
+  - Probar `https://www.lusotec.cl/en/`
+  - Probar selector `ES ↔ EN`
+- [ ] **Probar Formulario de Contacto**:
+  - Enviar solicitud en versión ES: verificar que registre `idioma = es` y áreas de interés en español en Google Sheets.
+  - Enviar solicitud en versión EN: verificar que registre `idioma = en` y áreas de interés en inglés (ej. `Finishing & Auxiliaries`) en Google Sheets.
+  - Verificar captura de parámetros UTM (`?utm_source=...`).
+- [ ] **Probar Canales Directos**:
+  - Probar botón flotante y directo de WhatsApp.
+  - Probar enlace de correo `mailto:`.
+  - Probar descarga de la vCard (`Victor_Marques_Lusotec.vcf`).
+  - Escanear código QR con smartphone.
+- [ ] **Verificar Responsividad & Rendimiento**:
+  - Probar visualización en escritorio, tablet y móviles (iOS/Android).
+  - Verificar certificado SSL (HTTPS sin advertencias mixtas).
+  - Abrir la consola del navegador F12 y verificar que no existan errores 404 ni excepciones JS.
 
-El webhook configurado en `script.js` procesa formularios de ambas páginas de manera unificada:
-- **Webhook URL**: `https://script.google.com/macros/s/AKfycbwJrdIE4B6m5AIqhfQXOumiFo3fKLmbuyIKUfthtVJAiQlGFXDLQ9risD-sANkqlsB3xw/exec`
-- **Pestaña destino**: `Leads Landing`
-- **Comportamiento por idioma**:
-  - `ES`: Registra `idioma = es` y áreas de interés en español (ej. `Terminación y auxiliares`).
-  - `EN`: Registra `idioma = en` y áreas de interés en inglés (ej. `Finishing & Auxiliaries`).
+### FASE 6 — Indexación en Buscadores
+- [ ] **Habilitar `robots.txt` público**: Confirmar que `robots.txt` permita la indexación de la raíz `/` y el subdirectorio `/en/`.
+- [ ] **Verificar `sitemap.xml`**: Confirmar que `sitemap.xml` sea accesible en `https://www.lusotec.cl/sitemap.xml`.
+- [ ] **Google Search Console**:
+  - Enviar la propiedad `https://www.lusotec.cl/` a Google Search Console.
+  - Enviar la URL del mapa del sitio `sitemap.xml`.
+  - Solicitar la indexación manual de la página de inicio `https://www.lusotec.cl/` y la versión en inglés `https://www.lusotec.cl/en/`.
 
 ---
 

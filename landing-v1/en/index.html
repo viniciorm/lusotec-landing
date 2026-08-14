@@ -17,6 +17,9 @@
     <link rel="alternate" hreflang="en" href="https://www.lusotec.cl/landing-v1/en/">
     <link rel="alternate" hreflang="x-default" href="https://www.lusotec.cl/landing-v1/">
 
+    <!-- Preload Critical Hero Image (LCP Element) -->
+    <link rel="preload" as="image" href="../assets/leather-bg.webp" type="image/webp">
+
     <!-- Open Graph Meta Tags (English) -->
     <meta property="og:title" content="LUSOTEC SPA | Chemical Products & Technical Advice for Leather">
     <meta property="og:description" content="Specialized chemical products, technical advice and solutions for the leather industry. Discover LUSOTEC SPA solutions.">
@@ -33,8 +36,8 @@
     <meta name="twitter:description" content="Specialized chemical products, technical advice and solutions for the leather industry. Discover LUSOTEC SPA solutions.">
     <meta name="twitter:image" content="https://www.lusotec.cl/landing-v1/assets/logo-lusotec.jpg">
 
-    <!-- Favicon -->
-    <link rel="icon" type="image/jpeg" href="../assets/logo-lusotec.jpg">
+    <!-- Favicon (Optimized WebP with JPG fallback) -->
+    <link rel="icon" type="image/webp" href="../assets/logo-lusotec.webp">
 
     <!-- Fonts & CSS -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -156,7 +159,10 @@
     <header class="header" id="header">
         <div class="container header-container">
             <a href="#hero" class="brand">
-                <img src="../assets/logo-lusotec.jpg" alt="LUSOTEC SPA - Chemical products for the leather industry" class="brand-logo" width="160" height="44">
+                <picture>
+                    <source srcset="../assets/logo-lusotec.webp" type="image/webp">
+                    <img src="../assets/logo-lusotec.jpg" alt="LUSOTEC SPA - Chemical products for the leather industry" class="brand-logo" width="160" height="44">
+                </picture>
                 <span class="brand-title">LUSOTEC <span class="brand-sub">SPA</span></span>
             </a>
 
@@ -213,7 +219,7 @@
     <main>
         <!-- Hero Section -->
         <section class="hero" id="hero">
-            <div class="hero-bg" style="background-image: url('../assets/leather-bg.jpg');"></div>
+            <div class="hero-bg" style="background-image: url('../assets/leather-bg.webp');"></div>
             <div class="hero-overlay"></div>
             <div class="container hero-container">
                 <div class="hero-badge">
@@ -244,7 +250,10 @@
                         </div>
                     </div>
                     <div class="about-image-wrapper">
-                        <img src="../assets/lab-bg.jpg" alt="Lusotec chemical product formulation and quality control laboratory" class="about-img" width="600" height="400" loading="lazy">
+                        <picture>
+                            <source srcset="../assets/lab-bg.webp" type="image/webp">
+                            <img src="../assets/lab-bg.jpg" alt="Lusotec chemical product formulation and quality control laboratory" class="about-img" width="600" height="400" loading="lazy">
+                        </picture>
                         <div class="about-img-badge">
                             <span class="badge-number">100%</span>
                             <span class="badge-text">Commitment to Quality & Circular Economy</span>
@@ -280,7 +289,7 @@
 
                     <div class="value-card">
                         <div class="value-icon">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 2a10 10 0 1 0 10 10A10 10 0 0 1 8-8 8 8 0 0 1-8 8z"/><path d="M12 6v6l4 2"/></svg>
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2zm0 18a8 8 0 1 1 8-8 8 8 0 0 1-8 8z"/><path d="M12 6v6l4 2"/></svg>
                         </div>
                         <h3 class="value-title">Sustainable solutions</h3>
                         <p class="value-desc">Promoting circular economy principles and environmentally responsible inputs.</p>
@@ -691,7 +700,10 @@
                     <div class="contact-info-wrapper">
                         <div class="contact-card">
                             <div class="contact-card-header">
-                                <img src="../assets/logo-lusotec.jpg" alt="LUSOTEC SPA - Víctor Marques Ferreira" class="contact-logo" width="64" height="64">
+                                <picture>
+                                    <source srcset="../assets/logo-lusotec.webp" type="image/webp">
+                                    <img src="../assets/logo-lusotec.jpg" alt="LUSOTEC SPA - Víctor Marques Ferreira" class="contact-logo" width="64" height="64">
+                                </picture>
                                 <div>
                                     <h3 class="contact-person-name">Víctor Marques Ferreira</h3>
                                     <p class="contact-person-title">General Manager</p>
@@ -766,7 +778,10 @@
         <div class="container footer-container">
             <div class="footer-brand">
                 <a href="#hero" class="brand">
-                    <img src="../assets/logo-lusotec.jpg" alt="LUSOTEC SPA" class="brand-logo" width="160" height="44">
+                    <picture>
+                        <source srcset="../assets/logo-lusotec.webp" type="image/webp">
+                        <img src="../assets/logo-lusotec.jpg" alt="LUSOTEC SPA" class="brand-logo" width="160" height="44">
+                    </picture>
                     <span class="brand-title">LUSOTEC <span class="brand-sub">SPA</span></span>
                 </a>
                 <p class="footer-tagline">Solutions and alternatives for leather and derivatives</p>
